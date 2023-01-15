@@ -33,6 +33,9 @@ export class UserEntity extends BaseEntity {
   })
   roles: RoleEntity[];
 
-  @OneToOne(() => AddressEntity, (address) => address.user)
+  @OneToOne(() => AddressEntity, (address) => address.user, {
+    cascade: ['insert', 'update'],
+    eager: true,
+  })
   address: AddressEntity;
 }

@@ -16,8 +16,13 @@ export class UserValidateHandler implements IQueryHandler<UserValidateQuery> {
     private readonly userMapper: UserMapper,
   ) {}
 
-  async execute({ request }: UserValidateQuery): Promise<UserValidateResponse> {
-    const record = await this.repository.findOneBy(request);
+  async execute({
+    request: where,
+  }: UserValidateQuery): Promise<UserValidateResponse> {
+    const record = await this.repository.findOne({
+      where,
+      relations: ['roles', 'roles.permissions'],
+    });
     if (!record) {
       throw new NotFoundException('user not found');
     }

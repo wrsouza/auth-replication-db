@@ -1,4 +1,5 @@
 import { Entity } from '../../common/domain/entity';
+import { Address } from './address';
 import { IUser, IUserValues } from './interfaces';
 import { Role } from './role';
 import { UserId } from './user-id';
@@ -8,6 +9,7 @@ export class User extends Entity<UserId> {
   private _email: string;
   private _password: string;
   private _isAdmin: boolean;
+  private _address: Address;
   private _roles: Role[];
 
   constructor(user: IUserValues) {
@@ -19,6 +21,7 @@ export class User extends Entity<UserId> {
     this._isAdmin = user.isAdmin;
     this._createdAt = user.createdAt;
     this._updatedAt = user.updatedAt;
+    this._address = user.address;
     this._roles = user.roles;
   }
 
@@ -38,6 +41,10 @@ export class User extends Entity<UserId> {
     return this._isAdmin;
   }
 
+  get address(): Address {
+    return this._address;
+  }
+
   get roles(): Role[] {
     return this._roles;
   }
@@ -54,6 +61,9 @@ export class User extends Entity<UserId> {
     }
     if (user.isAdmin) {
       this._isAdmin = user.isAdmin;
+    }
+    if (user.address) {
+      this._address.update(user.address);
     }
   }
 }

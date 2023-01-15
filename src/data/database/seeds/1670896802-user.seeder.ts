@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { v4 as uuid } from 'uuid';
@@ -19,6 +20,12 @@ export default class UserSeeder implements Seeder {
         email: 'john.doe@domain.com',
         password: Encrypt.hash('password'),
         isAdmin: false,
+        address: {
+          postalCode: faker.address.zipCode().replace(/\D/g, ''),
+          lineAddress: faker.address.streetAddress(true),
+          city: faker.address.city(),
+          state: faker.address.stateAbbr(),
+        },
         roles,
       },
     ]);

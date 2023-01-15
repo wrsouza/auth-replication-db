@@ -1,7 +1,7 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 import { Encrypt } from '../../../../data/utils';
-import { Role, User, UserId } from '../../../domain';
+import { Address, Role, User, UserId } from '../../../domain';
 import { RoleRepository, UserRepository } from '../../../infrastructure';
 import { UserCreatedSnsEvent } from '../../events';
 import { CreateUserCommand } from './create-user.command';
@@ -26,6 +26,9 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
       ...createUser,
       id: new UserId(),
       password: encryptedPassword,
+      address: new Address({
+        ...createUser.address,
+      }),
       roles,
     });
     await this.userRepository.save(user);

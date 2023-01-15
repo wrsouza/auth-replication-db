@@ -1,5 +1,39 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsString } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsString, ValidateNested } from 'class-validator';
+
+class CreateUserAddressRequest {
+  @ApiProperty({
+    minLength: 8,
+    maxLength: 8,
+    example: '57868-584',
+  })
+  @IsString()
+  @Transform(({ value }) => value.replace(/\D/g, ''))
+  postalCode: string;
+
+  @ApiProperty({
+    maxLength: 255,
+    example: '095 Casper Loaf Apt. 374',
+  })
+  @IsString()
+  lineAddress: string;
+
+  @ApiProperty({
+    maxLength: 50,
+    example: 'Jakeview',
+  })
+  @IsString()
+  city: string;
+
+  @ApiProperty({
+    minLength: 2,
+    maxLength: 2,
+    example: 'CO',
+  })
+  @IsString()
+  state: string;
+}
 
 export class CreateUserRequest {
   @ApiProperty({
@@ -29,6 +63,13 @@ export class CreateUserRequest {
   })
   @IsBoolean()
   isAdmin: boolean;
+
+  @ApiProperty({
+    type: CreateUserAddressRequest,
+  })
+  @ValidateNested()
+  @Type(() => CreateUserAddressRequest)
+  address: CreateUserAddressRequest;
 
   @ApiProperty({
     type: [String],

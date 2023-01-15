@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../../common/decorators';
@@ -37,7 +37,7 @@ export class UsersController {
   @Roles('user-details')
   @UseGuards(JwtAuthGuard)
   async userDetails(
-    @Body() request: UserDetailsRequest,
+    @Param() request: UserDetailsRequest,
   ): Promise<UserDetailsResponse> {
     const query = new UserDetailsQuery(request.id);
     return this.queryBus.execute(query);

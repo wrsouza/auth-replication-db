@@ -1,9 +1,11 @@
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
-import { BaseEntity } from './base';
 import { UserEntity } from './user.entity';
 
 @Entity('address')
-export class AddressEntity extends BaseEntity {
+export class AddressEntity {
+  @Column({ name: 'user_id', primary: true })
+  userId: string;
+
   @Column({ name: 'postal_code', type: 'varchar', length: 8 })
   postalCode: string;
 

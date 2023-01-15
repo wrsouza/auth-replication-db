@@ -4,12 +4,14 @@ export class CreateRoleResponse {
   id: string;
   name: string;
   description: string;
-  createdAt: Date;
+  permissions: string[];
 
   constructor(role: Role) {
     this.id = role.id.value;
     this.name = role.name;
     this.description = role.description;
-    this.createdAt = role.createdAt;
+    this.permissions = role.permissions.map(
+      (permission) => permission.id.value,
+    );
   }
 }

@@ -1,3 +1,4 @@
+export * from './address.mapper';
 export * from './permission.mapper';
 export * from './permission.repository';
 export * from './role.mapper';

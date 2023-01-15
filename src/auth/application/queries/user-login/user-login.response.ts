@@ -1,7 +1,7 @@
 export class UserLoginResponse {
-  token: string;
+  accessToken: string;
 
   constructor(token: string) {
-    this.token = token;
+    this.accessToken = token;
   }
 }

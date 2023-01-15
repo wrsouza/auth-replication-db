@@ -17,7 +17,10 @@ export class UserDetailsHandler implements IQueryHandler<UserDetailsQuery> {
   ) {}
 
   async execute({ id }: UserDetailsQuery): Promise<UserDetailsResponse> {
-    const record = await this.repository.findOneBy({ id });
+    const record = await this.repository.findOne({
+      where: { id },
+      relations: ['roles', 'roles.permissions'],
+    });
     if (!record) {
       throw new NotFoundException('user not found');
     }

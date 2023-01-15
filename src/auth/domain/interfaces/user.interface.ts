@@ -1,5 +1,7 @@
+import { Address } from '../address';
 import { Role } from '../role';
 import { UserId } from '../user-id';
+import { IAddress } from './address.interface';
 import { IRole } from './role.interface';
 
 export interface IUserValues {
@@ -10,6 +12,7 @@ export interface IUserValues {
   isAdmin: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  address: Address;
   roles: Role[];
 }
 
@@ -21,5 +24,6 @@ export interface IUser {
   isAdmin: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  address?: IAddress;
   roles?: IRole[];
 }

@@ -9,12 +9,15 @@ import {
   UserEntity,
 } from '../data/database/entities';
 import { JwtService } from '../data/jwt/jwt.service';
+import { CommandHandlers } from './application/commands/handlers';
+import { EventHandlers } from './application/events/handlers';
 import { QueryHandlers } from './application/queries/handlers';
 import { AuthController } from './controllers/auth.controller';
 import { PermissionsController } from './controllers/permissions.controller';
 import { RolesController } from './controllers/roles.controller';
 import { UsersController } from './controllers/users.controller';
 import {
+  AddressMapper,
   PermissionMapper,
   PermissionRepository,
   RoleMapper,
@@ -44,11 +47,14 @@ import { UserRepository } from './infrastructure/user.repository';
     RoleRepository,
     PermissionRepository,
     UserMapper,
+    AddressMapper,
     RoleMapper,
     PermissionMapper,
     JwtService,
     AppConfig,
     ...QueryHandlers,
+    ...CommandHandlers,
+    ...EventHandlers,
   ],
 })
 export class AuthModule {}
