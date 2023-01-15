@@ -8,6 +8,5 @@ export class UserCreatedSnsHandler
 {
   handle({ user }: UserCreatedSnsEvent) {
     Logger.log(`user: ${JSON.stringify(user)}`);
-    throw new Error('Method not implemented.');
   }
 }

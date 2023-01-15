@@ -13,6 +13,8 @@ $ npm install
 ## Running the app
 
 ```bash
+# edit/rename .env file with .env.example
+
 # development
 $ npm run start
 
@@ -36,11 +38,17 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Database
+
+```bash
+# check database ports on your local machine before run it
+$ docker-compose up -d
+```
+
 ## Migrations
 
 ```bash
-# edit/rename .env files with .env.example
-- .env
+# edit/rename .env file with .env.example
 
 # generate migration script
 $ npm run migration:generate src/data/database/migrations/nome_da_migracao
@@ -54,12 +62,3 @@ $ npm run migration:revert
 # seeding database
 $ npm run db:seed
 ```
-
-## Stay in touch
-
-- Author - [Willian Souza](mailto:wrdigital@hotmail.com)
-- Contact - [LinkedIn](https://www.linkedin.com/in/willian-robert-a88a0358)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
