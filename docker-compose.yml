@@ -2,6 +2,7 @@ version: '3'
 services:
   postgres-slave:
     image: 'nebirhos/postgres-replication'
+    container_name: postgres-slave
     ports:
       - 5433:5432
     links:
@@ -12,5 +13,18 @@ services:
 
   postgres-master:
     image: 'nebirhos/postgres-replication'
+    container_name: postgres-master
     ports:
       - 5432:5432
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - '5050:80'
+    links:
+      - postgres-master
+      - postgres-slave

@@ -62,3 +62,15 @@ $ npm run migration:revert
 # seeding database
 $ npm run db:seed
 ```
+
+## References
+
+```bash
+# TypeORM set up read/write replication.
+https://typeorm.io/multiple-data-sources#replication
+
+## All schema update and write operations are performed using master server. All simple queries performed by find methods or select query builder are using a random slave instance. All queries performed by query method are performed using the master instance.
+
+# Postgres Streaming Replication
+https://hub.docker.com/r/nebirhos/postgres-replication
+```
